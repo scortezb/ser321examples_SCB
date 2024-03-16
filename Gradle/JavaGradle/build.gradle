@@ -3,6 +3,8 @@ apply plugin: 'application'
 
 //define main class
 mainClassName = 'Multiply'
+//define main class
+mainClassName = 'Fraction'
 
 // task which will run Main with default parameters, 
 // can be overwritten with: gradle runApp --args '3 4' 
@@ -49,6 +51,34 @@ task runFraction(type: JavaExec) {
   classpath = sourceSets.main.runtimeClasspath
 
   main = 'Fraction'
+}
+
+// This task will take a numerator and a denominator and it will make them a fraction
+task runFrac() {
+    doLast {
+        def num = project.hasProperty("num") ? project.getProperty("num") : "0"
+        def denom = project.hasProperty("denom") ? project.getProperty("denom") : "0"
+        
+        if (num == "0" && denom == "0") {
+            // No arguments provided, run with default values
+            javaexec {
+                main = "Fraction"
+                //Default values when non are provided
+                args = [4, 2]
+                classpath = sourceSets.main.runtimeClasspath
+            }
+        } else if (num != "0" && denom != "0") {
+            // Two arguments provided
+            javaexec {
+                main = "Fraction"
+                args = [num, denom]
+                classpath = sourceSets.main.runtimeClasspath
+            }
+        } else {
+            // Only one argument provided
+            println("Please provide both numerator and denominator.")
+        }
+    }
 }
 
 // Try:

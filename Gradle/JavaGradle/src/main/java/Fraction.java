@@ -38,21 +38,25 @@ public class Fraction {
    }
 
    public static void main (String args[]) {
+        Fraction frac = new Fraction();
+
+         try {
+            int num = Integer.parseInt(args[0]);
+            int denom = Integer.parseInt(args[1]);
+            frac.setNumerator(num);
+            frac.setDenominator(denom);
+         } catch (NumberFormatException e) {
+            System.out.println("Please provide valid integer arguments.");
+            return;
+         }
+     
       try {
-         // create a new instance
-         // Fraction *frac = [[Fraction alloc] init];
-         Fraction frac = new Fraction();
-
-         // set the values
-         frac.setNumerator(1);
-         frac.setDenominator(3);
-
          // print it
          System.out.print("The fraction is: ");
          frac.print();
          System.out.println("");
 
-      }catch(Exception e) {
+      } catch(Exception e) {
          e.printStackTrace();
       }
    }
